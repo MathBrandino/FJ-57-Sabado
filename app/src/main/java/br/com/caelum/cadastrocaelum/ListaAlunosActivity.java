@@ -1,6 +1,7 @@
 package br.com.caelum.cadastrocaelum;
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -43,7 +44,8 @@ public class ListaAlunosActivity extends AppCompatActivity {
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int posicao, long id) {
 
 
-                Toast.makeText(ListaAlunosActivity.this, "A posição é: " + posicao, Toast.LENGTH_SHORT).show();
+                Snackbar.make(lista,"Cliquei", Snackbar.LENGTH_LONG).show();
+                //Toast.makeText(ListaAlunosActivity.this, "A posição é: " + posicao, Toast.LENGTH_SHORT).show();
 
                 return true;
             }
