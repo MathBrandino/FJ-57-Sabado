@@ -7,8 +7,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import br.com.caelum.cadastrocaelum.helper.FormularioHelper;
+import br.com.caelum.cadastrocaelum.modelo.Aluno;
 
 public class FormularioActivity extends AppCompatActivity {
+
+    private FormularioHelper helper;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -19,6 +27,8 @@ public class FormularioActivity extends AppCompatActivity {
 
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+
+        this.helper = new FormularioHelper(this);
     }
 
 
@@ -40,6 +50,13 @@ public class FormularioActivity extends AppCompatActivity {
         switch (item.getItemId()) {
 
             case R.id.formulario_menu_salvar:
+
+
+                Aluno aluno = helper.pegaAlunoDoFormulario();
+
+
+                Toast.makeText(this, aluno.getNome(), Toast.LENGTH_SHORT).show();
+
                 finish();
 
                 break;

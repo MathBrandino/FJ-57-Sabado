@@ -15,6 +15,7 @@
             android:layout_height="wrap_content">
 
             <EditText
+                android:id="@+id/formulario_nome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Nome"
@@ -27,6 +28,7 @@
             android:layout_height="wrap_content">
 
             <EditText
+                android:id="@+id/formulario_telefone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Telefone"
@@ -39,6 +41,7 @@
             android:layout_height="wrap_content">
 
             <EditText
+                android:id="@+id/formulario_endereco"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Endereço" />
@@ -50,6 +53,7 @@
             android:layout_height="wrap_content">
 
             <EditText
+                android:id="@+id/formulario_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Email"
@@ -58,6 +62,7 @@
         </android.support.design.widget.TextInputLayout>
 
         <RatingBar
+            android:id="@+id/formulario_nota"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
