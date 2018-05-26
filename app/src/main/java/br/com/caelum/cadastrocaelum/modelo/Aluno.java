@@ -3,6 +3,7 @@ package br.com.caelum.cadastrocaelum.modelo;
 public class Aluno {
 
 
+    private Long id;
     private String nome;
     private String email;
     private String endereco;
@@ -47,5 +48,13 @@ public class Aluno {
 
     public void setNota(Double nota) {
         this.nota = nota;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

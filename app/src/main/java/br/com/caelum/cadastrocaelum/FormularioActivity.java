@@ -7,9 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.EditText;
 import android.widget.Toast;
 
+import br.com.caelum.cadastrocaelum.dao.AlunoDAO;
 import br.com.caelum.cadastrocaelum.helper.FormularioHelper;
 import br.com.caelum.cadastrocaelum.modelo.Aluno;
 
@@ -55,9 +55,24 @@ public class FormularioActivity extends AppCompatActivity {
                 Aluno aluno = helper.pegaAlunoDoFormulario();
 
 
-                Toast.makeText(this, aluno.getNome(), Toast.LENGTH_SHORT).show();
+                if (helper.camposValidados()){
 
-                finish();
+                    AlunoDAO alunoDAO = new AlunoDAO(this);
+
+                    alunoDAO.salva(aluno);
+
+                    alunoDAO.close();
+
+                    finish();
+                } else {
+                    helper.mostraErro();
+                }
+
+
+
+
+
+
 
                 break;
 

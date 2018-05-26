@@ -1,5 +1,6 @@
 package br.com.caelum.cadastrocaelum.helper;
 
+import android.support.design.widget.TextInputLayout;
 import android.widget.EditText;
 import android.widget.RatingBar;
 
@@ -17,6 +18,8 @@ public class FormularioHelper {
     private EditText campoEndereco;
     private RatingBar campoNota;
 
+    private TextInputLayout tilNome;
+
 
     public FormularioHelper(FormularioActivity formulario) {
 
@@ -25,6 +28,7 @@ public class FormularioHelper {
         this.campoTelefone = formulario.findViewById(R.id.formulario_telefone);
         this.campoEndereco = formulario.findViewById(R.id.formulario_endereco);
         this.campoNota = formulario.findViewById(R.id.formulario_nota);
+        this.tilNome = formulario.findViewById(R.id.formulario_til_nome);
     }
 
     public Aluno pegaAlunoDoFormulario() {
@@ -37,5 +41,25 @@ public class FormularioHelper {
 
 
         return aluno;
+    }
+
+
+    public boolean camposValidados() {
+
+        String stringComNome = campoNome.getText().toString();
+
+        return !stringComNome.isEmpty();
+
+    }
+
+    public void mostraErro() {
+
+        carregaErro(tilNome, "Campo não pode estar vazio", campoNome.getText().toString().isEmpty());
+
+    }
+
+    private void carregaErro(TextInputLayout til, String mensagem, boolean mostraErro) {
+        if (mostraErro)
+            til.setError(mensagem);
     }
 }
