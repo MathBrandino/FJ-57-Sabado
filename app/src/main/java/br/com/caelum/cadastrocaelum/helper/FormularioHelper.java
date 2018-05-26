@@ -62,4 +62,15 @@ public class FormularioHelper {
         if (mostraErro)
             til.setError(mensagem);
     }
+
+    public void colocaAlunoNaTela(Aluno aluno) {
+
+        campoNome.setText(aluno.getNome());
+        campoTelefone.setText(aluno.getTelefone());
+        campoEmail.setText(aluno.getEmail());
+        campoEndereco.setText(aluno.getEndereco());
+        campoNota.setRating(aluno.getNota().floatValue());
+
+        this.aluno = aluno;
+    }
 }

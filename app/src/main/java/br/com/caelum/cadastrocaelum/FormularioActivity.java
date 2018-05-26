@@ -1,5 +1,6 @@
 package br.com.caelum.cadastrocaelum;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
@@ -7,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import br.com.caelum.cadastrocaelum.dao.AlunoDAO;
 import br.com.caelum.cadastrocaelum.helper.FormularioHelper;
@@ -29,6 +29,18 @@ public class FormularioActivity extends AppCompatActivity {
 
 
         this.helper = new FormularioHelper(this);
+
+
+        Intent intent = getIntent();
+
+        if (intent.hasExtra("aluno")) {
+            Aluno aluno = (Aluno) intent.getSerializableExtra("aluno");
+
+            helper.colocaAlunoNaTela(aluno);
+        }
+
+
+
     }
 
 
@@ -59,8 +71,12 @@ public class FormularioActivity extends AppCompatActivity {
 
                     AlunoDAO alunoDAO = new AlunoDAO(this);
 
-                    alunoDAO.salva(aluno);
+                    if (aluno.getId() == null) {
 
+                        alunoDAO.salva(aluno);
+                    } else {
+                        alunoDAO.atualiza(aluno);
+                    }
                     alunoDAO.close();
 
                     finish();
