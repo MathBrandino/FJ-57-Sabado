@@ -12,31 +12,29 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.List;
+
+import br.com.caelum.cadastrocaelum.dao.AlunoDAO;
+import br.com.caelum.cadastrocaelum.modelo.Aluno;
+
 public class ListaAlunosActivity extends AppCompatActivity {
+
+    private ListView lista;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_alunos);
-
-        String[] alunos = {"Gabriel", "Luiz", "Dilan", "Janaina"};
-
-        final ListView lista = findViewById(R.id.lista);
-
-
-        ArrayAdapter<String> adapter =
-                new ArrayAdapter(this,android.R.layout.simple_list_item_1,alunos);
-
-        lista.setAdapter(adapter);
+        lista = findViewById(R.id.lista);
 
 
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int posicao, long id) {
 
-                String aluno = (String) lista.getItemAtPosition(posicao);
+                Aluno aluno = (Aluno) lista.getItemAtPosition(posicao);
 
-                Toast.makeText(ListaAlunosActivity.this, aluno, Toast.LENGTH_SHORT).show();
+                Toast.makeText(ListaAlunosActivity.this, aluno.getNome(), Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -73,5 +71,23 @@ public class ListaAlunosActivity extends AppCompatActivity {
 
 
 
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        carregaLista();
+    }
+
+    private void carregaLista() {
+        AlunoDAO alunoDAO = new AlunoDAO(this);
+        List<Aluno> alunos = alunoDAO.getAlunos();
+        alunoDAO.close();
+
+        ArrayAdapter<Aluno> adapter =
+                new ArrayAdapter(this,android.R.layout.simple_list_item_1,alunos);
+
+        lista.setAdapter(adapter);
     }
 }
