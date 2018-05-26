@@ -1,6 +1,9 @@
 package br.com.caelum.cadastrocaelum;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -12,7 +15,7 @@ import android.widget.Toast;
 public class ListaAlunosActivity extends AppCompatActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_alunos);
 
@@ -52,6 +55,21 @@ public class ListaAlunosActivity extends AppCompatActivity {
         });
 
 
+        FloatingActionButton fab = findViewById(R.id.lista_fab);
+
+
+        final Context self = this;
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                Intent intecao = new Intent(self,FormularioActivity.class);
+                startActivity(intecao);
+
+            }
+        });
 
 
 
