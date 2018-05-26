@@ -2,6 +2,7 @@ package br.com.caelum.cadastrocaelum;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,6 +15,9 @@ public class FormularioActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario);
 
+        ActionBar actionBar = getSupportActionBar();
+
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
     }
 
@@ -36,6 +40,12 @@ public class FormularioActivity extends AppCompatActivity {
         switch (item.getItemId()) {
 
             case R.id.formulario_menu_salvar:
+                finish();
+
+                break;
+
+            case android.R.id.home:
+
                 finish();
 
                 break;
