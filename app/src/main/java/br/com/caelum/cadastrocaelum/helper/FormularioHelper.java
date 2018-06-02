@@ -4,7 +4,7 @@ import android.support.design.widget.TextInputLayout;
 import android.widget.EditText;
 import android.widget.RatingBar;
 
-import br.com.caelum.cadastrocaelum.FormularioActivity;
+import br.com.caelum.cadastrocaelum.activity.FormularioActivity;
 import br.com.caelum.cadastrocaelum.R;
 import br.com.caelum.cadastrocaelum.modelo.Aluno;
 

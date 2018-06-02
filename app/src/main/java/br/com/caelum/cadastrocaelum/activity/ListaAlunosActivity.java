@@ -1,4 +1,4 @@
-package br.com.caelum.cadastrocaelum;
+package br.com.caelum.cadastrocaelum.activity;
 
 import android.Manifest;
 import android.content.Context;
@@ -23,6 +23,7 @@ import android.widget.ListView;
 
 import java.util.List;
 
+import br.com.caelum.cadastrocaelum.R;
 import br.com.caelum.cadastrocaelum.dao.AlunoDAO;
 import br.com.caelum.cadastrocaelum.modelo.Aluno;
 

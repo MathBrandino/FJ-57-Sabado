@@ -1,4 +1,4 @@
-package br.com.caelum.cadastrocaelum;
+package br.com.caelum.cadastrocaelum.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import br.com.caelum.cadastrocaelum.R;
 import br.com.caelum.cadastrocaelum.dao.AlunoDAO;
 import br.com.caelum.cadastrocaelum.helper.FormularioHelper;
 import br.com.caelum.cadastrocaelum.modelo.Aluno;
