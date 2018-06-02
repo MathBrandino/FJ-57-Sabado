@@ -1,11 +1,15 @@
 package br.com.caelum.cadastrocaelum.helper;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 
-import br.com.caelum.cadastrocaelum.activity.FormularioActivity;
 import br.com.caelum.cadastrocaelum.R;
+import br.com.caelum.cadastrocaelum.activity.FormularioActivity;
 import br.com.caelum.cadastrocaelum.modelo.Aluno;
 
 public class FormularioHelper {
@@ -18,6 +22,10 @@ public class FormularioHelper {
     private EditText campoEndereco;
     private RatingBar campoNota;
 
+    private FloatingActionButton tiraFoto;
+    private ImageView foto;
+
+
     private TextInputLayout tilNome;
 
 
@@ -29,6 +37,9 @@ public class FormularioHelper {
         this.campoEndereco = formulario.findViewById(R.id.formulario_endereco);
         this.campoNota = formulario.findViewById(R.id.formulario_nota);
         this.tilNome = formulario.findViewById(R.id.formulario_til_nome);
+
+        this.tiraFoto = formulario.findViewById(R.id.formulario_foto_btn);
+        this.foto = formulario.findViewById(R.id.formulario_foto);
     }
 
     public Aluno pegaAlunoDoFormulario() {
@@ -39,10 +50,16 @@ public class FormularioHelper {
         aluno.setTelefone(campoTelefone.getText().toString());
         aluno.setNota(Double.valueOf(campoNota.getRating()));
 
+        aluno.setCaminhoFoto((String) foto.getTag(1));
+
 
         return aluno;
     }
 
+
+    public FloatingActionButton getTiraFoto() {
+        return tiraFoto;
+    }
 
     public boolean camposValidados() {
 
@@ -71,6 +88,32 @@ public class FormularioHelper {
         campoEndereco.setText(aluno.getEndereco());
         campoNota.setRating(aluno.getNota().floatValue());
 
+        if (aluno.getCaminhoFoto() != null)
+            colocaFotoNaTela(aluno.getCaminhoFoto());
+
         this.aluno = aluno;
     }
+
+    public void colocaFotoNaTela(String caminhoDaFoto) {
+
+        Bitmap fotoEmBitmap = BitmapFactory.decodeFile(caminhoDaFoto);
+
+        Bitmap bitmap = Bitmap.createScaledBitmap(fotoEmBitmap, 300, 300, true);
+
+        foto.setImageBitmap(bitmap);
+
+        foto.setTag(1, caminhoDaFoto);
+
+        foto.setScaleType(ImageView.ScaleType.FIT_XY);
+
+
+    }
+
+
+
+
+
+
+
+
 }
