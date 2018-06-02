@@ -1,16 +1,18 @@
 package br.com.caelum.cadastrocaelum.helper;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 
+import java.io.IOException;
+
 import br.com.caelum.cadastrocaelum.R;
 import br.com.caelum.cadastrocaelum.activity.FormularioActivity;
 import br.com.caelum.cadastrocaelum.modelo.Aluno;
+import br.com.caelum.cadastrocaelum.util.CarregadorDeFoto;
 
 public class FormularioHelper {
 
@@ -50,7 +52,7 @@ public class FormularioHelper {
         aluno.setTelefone(campoTelefone.getText().toString());
         aluno.setNota(Double.valueOf(campoNota.getRating()));
 
-        aluno.setCaminhoFoto((String) foto.getTag(1));
+        aluno.setCaminhoFoto((String) foto.getTag());
 
 
         return aluno;
@@ -80,7 +82,7 @@ public class FormularioHelper {
             til.setError(mensagem);
     }
 
-    public void colocaAlunoNaTela(Aluno aluno) {
+    public void colocaAlunoNaTela(Aluno aluno) throws IOException {
 
         campoNome.setText(aluno.getNome());
         campoTelefone.setText(aluno.getTelefone());
@@ -94,15 +96,16 @@ public class FormularioHelper {
         this.aluno = aluno;
     }
 
-    public void colocaFotoNaTela(String caminhoDaFoto) {
+    public void colocaFotoNaTela(String caminhoDaFoto) throws IOException {
 
-        Bitmap fotoEmBitmap = BitmapFactory.decodeFile(caminhoDaFoto);
 
-        Bitmap bitmap = Bitmap.createScaledBitmap(fotoEmBitmap, 300, 300, true);
+        Bitmap bitmap = CarregadorDeFoto.carrega(caminhoDaFoto);
 
-        foto.setImageBitmap(bitmap);
+        Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, 300, 300, true);
 
-        foto.setTag(1, caminhoDaFoto);
+        foto.setImageBitmap(scaledBitmap);
+
+        foto.setTag(caminhoDaFoto);
 
         foto.setScaleType(ImageView.ScaleType.FIT_XY);
 

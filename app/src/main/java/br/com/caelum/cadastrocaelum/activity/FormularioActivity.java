@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import java.io.File;
+import java.io.IOException;
 
 import br.com.caelum.cadastrocaelum.R;
 import br.com.caelum.cadastrocaelum.dao.AlunoDAO;
@@ -43,7 +44,10 @@ public class FormularioActivity extends AppCompatActivity {
         if (intent.hasExtra("aluno")) {
             Aluno aluno = (Aluno) intent.getSerializableExtra("aluno");
 
-            helper.colocaAlunoNaTela(aluno);
+            try {
+                helper.colocaAlunoNaTela(aluno);
+            } catch (IOException ignored) {
+            }
         }
 
 
@@ -74,7 +78,10 @@ public class FormularioActivity extends AppCompatActivity {
         if (requestCode == 123){
 
             if (resultCode == RESULT_OK){
-                helper.colocaFotoNaTela(caminhoDaFoto);
+                try {
+                    helper.colocaFotoNaTela(caminhoDaFoto);
+                } catch (IOException ignored) {
+                }
             }
         }
 
