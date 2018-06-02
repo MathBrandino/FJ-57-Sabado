@@ -107,4 +107,27 @@ public class AlunoDAO extends SQLiteOpenHelper {
 
         getWritableDatabase().update("Aluno", dados, "id=?", new String[]{aluno.getId().toString()});
     }
+
+    public void excluir(Aluno aluno) {
+
+
+        Long alunoId = aluno.getId();
+
+        String idASerDeletado = alunoId.toString();
+
+
+        getWritableDatabase().delete("Aluno", "id=?", new String[]{idASerDeletado});
+
+    }
+
+
+
+
+
+
+
+
+
+
+
 }

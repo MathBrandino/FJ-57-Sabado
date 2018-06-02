@@ -1,11 +1,15 @@
 package br.com.caelum.cadastrocaelum;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.ContextMenu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -42,10 +46,6 @@ public class ListaAlunosActivity extends AppCompatActivity {
                 startActivity(edicao);
 
 
-
-
-
-
             }
         });
 
@@ -58,7 +58,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
                 Snackbar.make(lista,"Cliquei", Snackbar.LENGTH_LONG).show();
                 //Toast.makeText(ListaAlunosActivity.this, "A posição é: " + posicao, Toast.LENGTH_SHORT).show();
 
-                return true;
+                return false;
             }
         });
 
@@ -79,6 +79,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
         });
 
 
+        registerForContextMenu(lista);
 
     }
 
@@ -99,4 +100,57 @@ public class ListaAlunosActivity extends AppCompatActivity {
 
         lista.setAdapter(adapter);
     }
+
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+                                    ContextMenu.ContextMenuInfo menuInfo) {
+
+
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+
+        int posicao = info.position;
+
+        final Aluno aluno = (Aluno) lista.getItemAtPosition(posicao);
+
+        MenuItem excluir = menu.add("Excluir");
+        MenuItem ligar = menu.add("Ligar");
+        MenuItem msg = menu.add("SMS");
+        MenuItem mapa = menu.add("Ver no mapa");
+        MenuItem site = menu.add("Site");
+
+        excluir.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+
+                final ListaAlunosActivity contexto = ListaAlunosActivity.this;
+
+                new AlertDialog.Builder(contexto)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setTitle("Atenção")
+                        .setMessage("Deseja realmente excluir o aluno : " + aluno.getNome() + " ?")
+                        .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                AlunoDAO dao = new AlunoDAO(contexto);
+
+                                dao.excluir(aluno);
+
+                                dao.close();
+
+                                carregaLista();
+                            }
+                        })
+                        .setNegativeButton("Não", null)
+                        .show();
+
+
+                return true;
+            }
+        });
+
+
+    }
+
 }
