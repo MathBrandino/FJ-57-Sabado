@@ -15,7 +15,7 @@ import br.com.caelum.cadastrocaelum.modelo.Aluno;
 public class AlunoDAO extends SQLiteOpenHelper {
 
     public static final String DATABASE = "CadastroEscola";
-    public static final int VERSAO = 1;
+    public static final int VERSAO = 2;
 
     public AlunoDAO(Context contexto) {
         super(contexto, DATABASE, null, VERSAO);
@@ -31,6 +31,7 @@ public class AlunoDAO extends SQLiteOpenHelper {
                 "email text, " +
                 "telefone text, " +
                 "endereco text, " +
+                "caminhoFoto text, " +
                 "nota real );";
 
 
@@ -39,6 +40,20 @@ public class AlunoDAO extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int versaoAntiga, int versaoNova) {
+
+
+        switch (versaoAntiga) {
+            case 1:
+                String alteracao = "alter table Aluno add column caminhoFoto text;";
+
+
+                sqLiteDatabase.execSQL(alteracao);
+
+            case 2:
+
+                // coisas da versão dois
+        }
+
 
     }
 
@@ -63,6 +78,9 @@ public class AlunoDAO extends SQLiteOpenHelper {
         dados.put("endereco", aluno.getEndereco());
         dados.put("telefone", aluno.getTelefone());
         dados.put("nota", aluno.getNota());
+        dados.put("caminhoFoto", aluno.getCaminhoFoto());
+
+
         return dados;
     }
 
@@ -89,7 +107,7 @@ public class AlunoDAO extends SQLiteOpenHelper {
             aluno.setTelefone(cursor.getString(cursor.getColumnIndex("telefone")));
             aluno.setEndereco(cursor.getString(cursor.getColumnIndex("endereco")));
             aluno.setNota(cursor.getDouble(cursor.getColumnIndex("nota")));
-
+            aluno.setCaminhoFoto(cursor.getString(cursor.getColumnIndex("caminhoFoto")));
 
             alunos.add(aluno);
         }
