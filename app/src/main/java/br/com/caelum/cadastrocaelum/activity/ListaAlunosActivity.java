@@ -24,6 +24,7 @@ import android.widget.ListView;
 import java.util.List;
 
 import br.com.caelum.cadastrocaelum.R;
+import br.com.caelum.cadastrocaelum.adapter.AlunoAdapter;
 import br.com.caelum.cadastrocaelum.dao.AlunoDAO;
 import br.com.caelum.cadastrocaelum.modelo.Aluno;
 
@@ -100,10 +101,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
         AlunoDAO alunoDAO = new AlunoDAO(this);
         List<Aluno> alunos = alunoDAO.getAlunos();
         alunoDAO.close();
-
-        ArrayAdapter<Aluno> adapter =
-                new ArrayAdapter(this, android.R.layout.simple_list_item_1, alunos);
-
+        AlunoAdapter adapter = new AlunoAdapter(alunos, this);
         lista.setAdapter(adapter);
     }
 
