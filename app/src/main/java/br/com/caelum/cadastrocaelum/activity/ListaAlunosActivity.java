@@ -29,6 +29,7 @@ import br.com.caelum.cadastrocaelum.adapter.AlunoAdapter;
 import br.com.caelum.cadastrocaelum.converter.AlunoConverter;
 import br.com.caelum.cadastrocaelum.dao.AlunoDAO;
 import br.com.caelum.cadastrocaelum.modelo.Aluno;
+import br.com.caelum.cadastrocaelum.webservices.WebCliente;
 
 public class ListaAlunosActivity extends AppCompatActivity {
 
@@ -235,7 +236,11 @@ public class ListaAlunosActivity extends AppCompatActivity {
 
                 String json = new AlunoConverter().toJSON(alunos);
 
-                Toast.makeText(this, json, Toast.LENGTH_SHORT).show();
+                WebCliente webCliente = new WebCliente();
+                String media = webCliente.buscaMedia(json);
+
+                Toast.makeText(this, media, Toast.LENGTH_SHORT).show();
+
         }
 
 
