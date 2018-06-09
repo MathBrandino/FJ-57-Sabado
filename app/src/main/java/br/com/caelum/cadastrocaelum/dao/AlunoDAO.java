@@ -139,13 +139,19 @@ public class AlunoDAO extends SQLiteOpenHelper {
     }
 
 
+    public boolean tenhoAlunoComEsse(String numero) {
+
+        String sql = "select * from Aluno where telefone = ?";
+
+        String[] parametros = {numero};
+        Cursor cursor = getReadableDatabase().rawQuery(sql, parametros);
+
+        boolean temRegistro = cursor.moveToNext();
+
+        cursor.close();
+
+        return temRegistro;
 
 
-
-
-
-
-
-
-
+    }
 }
