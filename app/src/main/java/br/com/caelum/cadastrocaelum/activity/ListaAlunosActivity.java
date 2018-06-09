@@ -20,16 +20,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.List;
 
 import br.com.caelum.cadastrocaelum.R;
 import br.com.caelum.cadastrocaelum.adapter.AlunoAdapter;
 import br.com.caelum.cadastrocaelum.dao.AlunoDAO;
+import br.com.caelum.cadastrocaelum.interfaces.MediaDelegate;
 import br.com.caelum.cadastrocaelum.modelo.Aluno;
 import br.com.caelum.cadastrocaelum.webservices.BuscaMediaTask;
 
-public class ListaAlunosActivity extends AppCompatActivity {
+public class ListaAlunosActivity extends AppCompatActivity implements MediaDelegate {
 
     private ListView lista;
 
@@ -240,4 +242,13 @@ public class ListaAlunosActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void trata(String media) {
+        Toast.makeText(this, media, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public Context getContext() {
+        return this;
+    }
 }
