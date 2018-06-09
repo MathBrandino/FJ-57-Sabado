@@ -20,16 +20,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.List;
 
 import br.com.caelum.cadastrocaelum.R;
 import br.com.caelum.cadastrocaelum.adapter.AlunoAdapter;
-import br.com.caelum.cadastrocaelum.converter.AlunoConverter;
 import br.com.caelum.cadastrocaelum.dao.AlunoDAO;
 import br.com.caelum.cadastrocaelum.modelo.Aluno;
-import br.com.caelum.cadastrocaelum.webservices.WebCliente;
+import br.com.caelum.cadastrocaelum.webservices.BuscaMediaTask;
 
 public class ListaAlunosActivity extends AppCompatActivity {
 
@@ -230,20 +228,16 @@ public class ListaAlunosActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.lista_envia_notas:
 
-                AlunoDAO alunoDAO = new AlunoDAO(this);
-                List<Aluno> alunos = alunoDAO.getAlunos();
-                alunoDAO.close();
+                BuscaMediaTask task = new BuscaMediaTask(this);
 
-                String json = new AlunoConverter().toJSON(alunos);
+                task.execute();
 
-                WebCliente webCliente = new WebCliente();
-                String media = webCliente.buscaMedia(json);
-
-                Toast.makeText(this, media, Toast.LENGTH_SHORT).show();
 
         }
 
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }

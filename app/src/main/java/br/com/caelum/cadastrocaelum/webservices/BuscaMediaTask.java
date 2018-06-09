@@ -1,0 +1,62 @@
+package br.com.caelum.cadastrocaelum.webservices;
+
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.os.AsyncTask;
+import android.widget.Toast;
+
+import java.util.List;
+
+import br.com.caelum.cadastrocaelum.converter.AlunoConverter;
+import br.com.caelum.cadastrocaelum.dao.AlunoDAO;
+import br.com.caelum.cadastrocaelum.modelo.Aluno;
+
+public class BuscaMediaTask extends AsyncTask<Void, Void, String> {
+
+
+    private Context contexto;
+    private ProgressDialog dialog;
+
+
+    public BuscaMediaTask(Context contexto) {
+        this.contexto = contexto;
+    }
+
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+
+        dialog = ProgressDialog.show(contexto, "Segura ai", "carregando", true, false);
+
+    }
+
+    @Override
+    protected String doInBackground(Void... objects) {
+
+        AlunoDAO alunoDAO = new AlunoDAO(contexto);
+        List<Aluno> alunos = alunoDAO.getAlunos();
+        alunoDAO.close();
+
+        final String json = new AlunoConverter().toJSON(alunos);
+
+
+        WebCliente webCliente = new WebCliente();
+        String media = webCliente.buscaMedia(json);
+
+
+        return media;
+    }
+
+
+    @Override
+    protected void onPostExecute(String media) {
+        dialog.cancel();
+
+
+        Toast.makeText(contexto,
+                media, Toast.LENGTH_SHORT)
+                .show();
+
+    }
+}
