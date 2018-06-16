@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 import br.com.caelum.cadastrocaelum.R;
+import br.com.caelum.cadastrocaelum.fragment.DetalhesProvaFragment;
 import br.com.caelum.cadastrocaelum.fragment.ListaProvasFragment;
 
 public class ProvaActivity extends AppCompatActivity {
@@ -20,10 +21,19 @@ public class ProvaActivity extends AppCompatActivity {
 
         FragmentTransaction transaction = fragmentManager.beginTransaction();
 
-        transaction.replace(R.id.frame, new ListaProvasFragment());
+        if (taDePe()) {
+            transaction.replace(R.id.frame, new ListaProvasFragment());
+        } else {
+            transaction.replace(R.id.frame_esquerda, new ListaProvasFragment());
+            transaction.replace(R.id.frame_direita, new DetalhesProvaFragment());
+        }
 
         transaction.commit();
 
 
+    }
+
+    private boolean taDePe() {
+        return getResources().getBoolean(R.bool.taDePe);
     }
 }
