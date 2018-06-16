@@ -27,6 +27,7 @@
             android:windowSoftInputMode="stateHidden">
 
         </activity>
+        <activity android:name=".activity.ProvaActivity" />
 
         <receiver android:name=".broadcast.SMSListener"
             android:enabled="true">

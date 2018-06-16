@@ -234,6 +234,15 @@ public class ListaAlunosActivity extends AppCompatActivity implements MediaDeleg
 
                 task.execute();
 
+                return true;
+
+
+            case R.id.lista_baixa_provas:
+
+                Intent irProvas = new Intent(this, ProvaActivity.class);
+
+                startActivity(irProvas);
+
 
         }
 
